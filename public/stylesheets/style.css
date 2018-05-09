@@ -87,7 +87,7 @@ Chat Title
     color: #fff;
     text-transform: uppercase;
     text-align: left;
-    padding: 10px 10px 10px 50px;
+    padding: 19px 19px 19px 59px;
 }
 
 .chat-title h1, .chat-title h2 {
@@ -106,11 +106,11 @@ Chat Title
 .chat-title .avatar {
     position: absolute;
     z-index: 1;
-    top: 8px;
-    left: 9px;
-    border-radius: 30px;
-    width: 30px;
-    height: 30px;
+    top: 17px;
+    left: 18px;
+    border-radius: 39px;
+    width: 39px;
+    height: 39px;
     overflow: hidden;
     margin: 0;
     padding: 0;
