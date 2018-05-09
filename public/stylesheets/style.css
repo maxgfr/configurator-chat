@@ -20,7 +20,7 @@ body {
     background: linear-gradient(135deg, #044f48, #2a7561);
     background-size: cover;
     font-family: 'Open Sans', sans-serif;
-    font-size: 20px;
+    font-size: 29px;
     line-height: 1.3;
     overflow: hidden;
 }
@@ -86,14 +86,14 @@ Chat Title
 
 .chat-title h1, .chat-title h2 {
     font-weight: normal;
-    font-size: 10px;
+    font-size: 19px;
     margin: 0;
     padding: 0;
 }
 
 .chat-title h2 {
     color: rgba(255, 255, 255, 0.5);
-    font-size: 8px;
+    font-size: 17px;
     letter-spacing: 1px;
 }
 
@@ -147,7 +147,7 @@ Messages
     border-radius: 10px 10px 10px 0;
     background: rgba(0, 0, 0, 0.3);
     margin: 8px 0;
-    font-size: 11px;
+    font-size: 20px;
     line-height: 1.4;
     margin-left: 35px;
     position: relative;
@@ -157,7 +157,7 @@ Messages
 .messages .message .timestamp {
     position: absolute;
     bottom: -60%;
-    font-size: 9px;
+    font-size: 18px;
     color: rgba(255, 255, 255, 0.3);
 }
 
@@ -244,8 +244,8 @@ Messages
 .messages .message.loading span {
     display: block;
     font-size: 0;
-    width: 20px;
-    height: 10px;
+    width: 29px;
+    height: 19px;
     position: relative;
 }
 
@@ -311,10 +311,10 @@ Message Box
     outline: none !important;
     resize: none;
     color: rgba(255, 255, 255, 0.7);
-    font-size: 11px;
-    height: 17px;
+    font-size: 20px;
+    height: 26px;
     margin: 0;
-    padding-right: 20px;
+    padding-right: 29px;
     width: 265px;
 }
 
@@ -330,7 +330,7 @@ Message Box
     color: #fff;
     border: none;
     background: #248A52;
-    font-size: 10px;
+    font-size: 19px;
     text-transform: uppercase;
     line-height: 1;
     padding: 6px 10px;

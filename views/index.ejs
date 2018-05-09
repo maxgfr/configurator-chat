@@ -33,13 +33,6 @@
 			</div>
 			<div class="messages">
 				<div class="messages-content">
-					<select id="example">
-  <option value="1">1</option>
-  <option value="2">2</option>
-  <option value="3">3</option>
-  <option value="4">4</option>
-  <option value="5">5</option>
-</select>
 				</div>
 			</div>
 			<div class="message-box">
@@ -52,14 +45,6 @@
 	<script src='javascripts/jquery-3.3.1.min.js'></script>
 	<script src='javascripts/jquery.mCustomScrollbar.min.js'></script>
 	<script src="javascripts/jquery.barrating.min.js"></script>
-	<script type="text/javascript">
-	   $(function() {
-	      $('#example').barrating({
-	        theme: 'fontawesome-stars'
-	      });
-	   });
-	</script>
-
 
 	<script>
 
@@ -83,7 +68,19 @@
 
 						setTimeout(function() {
 							$('.message.loading').remove();
-							$('<div class="message new"><figure class="avatar"><img src="images/bot.png" /></figure>' + res + '</div>').appendTo($('.mCSB_container')).addClass('new');
+							$('<div class="message new"><figure class="avatar"><img src="images/bot.png" /></figure>' + res +
+							'<br /><select id="secu" class="rating"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>'+
+							'<br /><select id="confort" class="rating"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>'+
+							'<br /><select id="vitesse" class="rating"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>'+
+							'<br /><select id="style" class="rating"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>'+
+							'<button id="validate"></button>' +
+							'</div>').appendTo($('.mCSB_container')).addClass('new');
+							$('.rating').barrating({
+								theme: 'fontawesome-stars'
+						  	});
+							$( "#validate" ).click(function() {
+					  			alert( "Handler for .click() called." );
+							});
 							setDate();
 							updateScrollbar();
 							i++;
@@ -130,7 +127,9 @@
 
 				setTimeout(function() {
 					$('.message.loading').remove();
-					$('<div class="message new"><figure class="avatar"><img src="images/bot.png" /></figure>' + message + '</div>').appendTo($('.mCSB_container')).addClass('new');
+					$('<div class="message new"><figure class="avatar"><img src="images/bot.png" /></figure>' + message +
+					  '<br /><br /><img src="https://www.telegraph.co.uk/cars/images/2017/11/24/5008-main_trans_NvBQzQNjv4BqxL-l5T0swaE5pb2bKp7NGV897OPMXJ2dqtbt9r5gyOo.jpg?imwidth=450" />' +
+					 '</div>').appendTo($('.mCSB_container')).addClass('new');
 					setDate();
 					updateScrollbar();
 					i++;
