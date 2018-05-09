@@ -11,6 +11,12 @@ Body
     box-sizing: border-box;
 }
 
+/* Responsive img */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
 html, body {
     height: 100%;
 }
