@@ -36,7 +36,7 @@
 				<div class="messages-content">
 				</div>
 			</div>
-			<div id="msg-box" class="message-box invisible">
+			<div id="msg-box" class="message-box">
 				<textarea type="text" class="message-input" placeholder="Type message..."></textarea>
 				<button type="submit" class="message-submit">Send</button>
 			</div>
@@ -67,24 +67,11 @@
 						}
 						$('<div class="message loading new"><figure class="avatar"><img src="images/bot.png" /></figure><span></span></div>').appendTo($('.mCSB_container'));
 						updateScrollbar();
-
+						var message = res[0].output.text;
 						setTimeout(function() {
 							$('.message.loading').remove();
-							$('<div class="message new"><figure class="avatar"><img src="images/bot.png" /></figure>' + res +
-							'<br />Security :<select id="secu" class="rating"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>'+
-							'<br />Confort :<select id="confort" class="rating"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>'+
-							'<br />Speed :<select id="vitesse" class="rating"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>'+
-							'<br />Style :<select id="style" class="rating"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>'+
-							'<br  /><button id="validate" class="btn btn-md btn-primary">Click here to validate your choice</button>' +
+							$('<div class="message new"><figure class="avatar"><img src="images/bot.png" /></figure>' + message +
 							'</div>').appendTo($('.mCSB_container')).addClass('new');
-							$('.rating').barrating({
-								theme: 'fontawesome-stars'
-						  	});
-							$( "#validate").click(function() {
-								$("#msg-box").removeClass('invisible');
-								$("#validate").addClass('invisible');
-					  			alert( "Choice done." );
-							});
 							setDate();
 							updateScrollbar();
 							i++;
@@ -95,7 +82,6 @@
 					}
 				});
 			}, 100);
-
 		});
 
 		function updateScrollbar() {
@@ -113,7 +99,7 @@
 			}
 		}
 
-		function insertMessage(msg,message) {
+		function insertMessage(msg,res) {
 
 			if ($.trim(msg) == '') {
 				return false;
@@ -129,16 +115,94 @@
 				$('<div class="message loading new"><figure class="avatar"><img src="images/bot.png" /></figure><span></span></div>').appendTo($('.mCSB_container'));
 				updateScrollbar();
 
-				setTimeout(function() {
-					$('.message.loading').remove();
-					$('<div class="message new"><figure class="avatar"><img src="images/bot.png" /></figure>' + message +
-					  '<br /><br /><img src="https://www.telegraph.co.uk/cars/images/2017/11/24/5008-main_trans_NvBQzQNjv4BqxL-l5T0swaE5pb2bKp7NGV897OPMXJ2dqtbt9r5gyOo.jpg?imwidth=450" />' +
-					 '</div>').appendTo($('.mCSB_container')).addClass('new');
-					setDate();
-					updateScrollbar();
-					i++;
-				}, 1000 + (Math.random() * 20) * 100);
-			}, 1000 + (Math.random() * 20) * 100);
+
+				//console.log(res);
+				var message = res[0].output.text[0];
+
+				var type = res[1];
+
+				var url_image = res[2];
+
+				if (type == "find_priority") {
+					setTimeout(function() {
+						$("#msg-box").addClass('invisible');
+						$('.message.loading').remove();
+						$('<div class="message new"><figure class="avatar"><img src="images/bot.png" /></figure>' + message +
+						'<br />Security :<select id="secu" class="rating"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>'+
+						'<br />Comfort :<select id="confort" class="rating"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>'+
+						'<br />Speed :<select id="vitesse" class="rating"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>'+
+						'<br />Style :<select id="style" class="rating"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>'+
+						'<br  /><button id="validate" class="btn btn-md btn-primary">Click here to validate your choice</button>' +
+						'</div>').appendTo($('.mCSB_container')).addClass('new');
+						 $('.rating').barrating({
+							 theme: 'fontawesome-stars'
+						 });
+						 $( "#validate").click(function() {
+							 info = [];
+							 var security = document.getElementById("secu");
+							 info[0] = security.options[security.selectedIndex].value;
+							 var confort = document.getElementById("confort");
+							 info[1] = confort.options[confort.selectedIndex].value;
+							 var vitesse = document.getElementById("vitesse");
+							 info[2] = vitesse.options[vitesse.selectedIndex].value;
+							 var style = document.getElementById("style");
+							 info[3] = style.options[style.selectedIndex].value;
+
+							 $("#msg-box").removeClass('invisible');
+							 $("#validate").remove();
+							 $.ajax({
+			 					type: "POST",
+			 					url: "/giveinfo",
+			 					data: {input: { security : info[0], confort : info[1] , vitesse : info[2], style : info[3] }},
+			 					dataType: 'json',
+			 					success: function (resultat) {
+			 						if ($('.message-input').val() != '') {
+			 							return false;
+			 						}
+			 						$('<div class="message loading new"><figure class="avatar"><img src="images/bot.png" /></figure><span></span></div>').appendTo($('.mCSB_container'));
+			 						updateScrollbar();
+			 						setTimeout(function() {
+			 							$('.message.loading').remove();
+			 							$('<div class="message new"><figure class="avatar"><img src="images/bot.png" /></figure>' + resultat[0].output.text[0] +
+			 							'</div>').appendTo($('.mCSB_container')).addClass('new');
+			 							setDate();
+			 							updateScrollbar();
+			 							i++;
+			 						}, 1000 + (Math.random() * 20) * 100);
+			 					},
+			 					error: function (data) {
+			 						console.log('Error:', data);
+			 					}
+			 				});
+						 });
+						setDate();
+						updateScrollbar();
+						i++;
+					}, 1000 + (Math.random() * 20) * 100);
+				}
+				else if (type == "display_car") {
+					setTimeout(function() {
+						$('.message.loading').remove();
+						$('<div class="message new"><figure class="avatar"><img src="images/bot.png" /></figure>' + message +
+						'<br /><br /><img src="'+url_image+'" />' +
+						 '</div>').appendTo($('.mCSB_container')).addClass('new');
+						setDate();
+						updateScrollbar();
+						i++;
+					}, 1000 + (Math.random() * 20) * 100);
+				} else {
+					setTimeout(function() {
+						$('.message.loading').remove();
+						$('<div class="message new"><figure class="avatar"><img src="images/bot.png" /></figure>' + message +
+						 '</div>').appendTo($('.mCSB_container')).addClass('new');
+						setDate();
+						updateScrollbar();
+						i++;
+					}, 1000 + (Math.random() * 20) * 100);
+				}
+
+
+			}, 100);
 		}
 
 		$('.message-submit').click(function() {
