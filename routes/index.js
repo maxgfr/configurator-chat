@@ -31,7 +31,7 @@ router.post('/',function(req, res, next) {
            console.error(err);
        } else {
             var type = 'nothing';
-            var name_image = '';
+            var name_image = {};
             console.log(response);
             //var rep = response.output.text;
             context = response.context;
@@ -45,7 +45,13 @@ router.post('/',function(req, res, next) {
                 if (response.entities[0].entity == 'color') {
                     type = "display_car";
                     var color = response.entities[0].value;
-                    name_image = 'images/Access'+color+'.jpg';
+                    name_image = {
+                      'name_image': 'images/Access'+color+'.jpg',
+                      'justifications': [{
+                        'text': 'Justification',
+                        'justification': 'It is the justification'
+                      }]
+                    };
                 }
             }
             res.send([response,type,name_image]);

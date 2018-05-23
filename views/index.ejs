@@ -121,8 +121,6 @@
 
 				var type = res[1];
 
-				var url_image = res[2];
-
 				if (type == "find_priority") {
 					setTimeout(function() {
 						$("#msg-box").addClass('invisible');
@@ -181,11 +179,21 @@
 					}, 1000 + (Math.random() * 20) * 100);
 				}
 				else if (type == "display_car") {
+					var name_image = res[2].name_image;
+					var justifications = res[2].justifications;
+					console.log(justifications);
+					var button = '';
+					for (var i=0; i<justifications.length ; i++) {
+						button += '<button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="'+justifications[i].justification+'">'+justifications[i].text,+'</button>';
+					}
+					$(function () {
+					  $('[data-toggle="tooltip"]').tooltip()
+					});
 					setTimeout(function() {
 						$('.message.loading').remove();
-						$('<div class="message new"><figure class="avatar"><img src="images/bot.png" /></figure><img src="'+url_image+'" />' +
+						$('<div class="message new"><figure class="avatar"><img src="images/bot.png" /></figure><img src="'+name_image+'" /><br /><br />' + button +
 						 '</div>'+'<div class="message new"><figure class="avatar"><img src="images/bot.png" /></figure>' + message +
- 						 '</div>').appendTo($('.mCSB_container')).addClass('new');
+						 '</div>').appendTo($('.mCSB_container')).addClass('new');
 						setDate();
 						updateScrollbar();
 						i++;
