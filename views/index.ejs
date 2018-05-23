@@ -183,9 +183,9 @@
 				else if (type == "display_car") {
 					setTimeout(function() {
 						$('.message.loading').remove();
-						$('<div class="message new"><figure class="avatar"><img src="images/bot.png" /></figure>' + message +
-						'<br /><br /><img src="'+url_image+'" />' +
-						 '</div>').appendTo($('.mCSB_container')).addClass('new');
+						$('<div class="message new"><figure class="avatar"><img src="images/bot.png" /></figure><img src="'+url_image+'" />' +
+						 '</div>'+'<div class="message new"><figure class="avatar"><img src="images/bot.png" /></figure>' + message +
+ 						 '</div>').appendTo($('.mCSB_container')).addClass('new');
 						setDate();
 						updateScrollbar();
 						i++;
