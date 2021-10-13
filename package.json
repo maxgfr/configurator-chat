@@ -15,7 +15,7 @@
     "http-errors": "~1.6.2",
     "jquery-bar-rating": "^1.2.2",
     "morgan": "~1.9.0",
-    "popper.js": "^1.14.3",
+    "popper.js": "^1.16.1",
     "watson-developer-cloud": "^3.4.1"
   }
 }
